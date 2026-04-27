@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stage299 Signature-Aware Gate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #e5e7eb; margin: 0; padding: 40px; }
+    .card { max-width: 900px; margin: auto; background: #111827; border: 1px solid #334155; border-radius: 18px; padding: 28px; }
+    .badge { display: inline-block; padding: 8px 12px; border-radius: 999px; background: #2563eb; color: white; font-weight: 700; }
+    pre { background: #020617; padding: 14px; border-radius: 12px; overflow-x: auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
+    .box { background: #020617; border: 1px solid #334155; border-radius: 14px; padding: 16px; }
+    .accept { color: #22c55e; }
+    .pending { color: #facc15; }
+    .reject { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">QSP / VEP / Stage299</div>
+    <h1>Signature-Aware Verification Gate</h1>
+    <p>Stage299 adds the Gate engine on top of the Stage288 public verification URL structure.</p>
+
+    <pre>if signature_valid:
+    decision = "accept"
+elif verification_ok:
+    decision = "pending"
+else:
+    decision = "reject"</pre>
+
+    <div class="grid">
+      <div class="box">
+        <h2 class="accept">accept</h2>
+        <p>Evidence is valid and signature is valid.</p>
+      </div>
+      <div class="box">
+        <h2 class="pending">pending</h2>
+        <p>Evidence is valid, but signature is missing or not yet verified.</p>
+      </div>
+      <div class="box">
+        <h2 class="reject">reject</h2>
+        <p>Evidence is invalid. Fail-closed Gate rejects it.</p>
+      </div>
+    </div>
+
+    <h2>Next</h2>
+    <p>Stage300 will use this Gate as the engine for an AI vulnerability verification URL showcase.</p>
+  </div>
+</body>
+</html>
