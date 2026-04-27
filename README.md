@@ -1,8 +1,14 @@
-# Stage299: Signature-Aware Gate
+# Stage299: Signature-Aware Verification Gate
 
-Stage299 builds on the public verification URL structure from Stage288 and adds the QSP/VEP Gate engine.
+Stage299 completes the QSP/VEP Gate engine.
 
-## Core Decision
+It builds on the public verification URL structure from Stage288 and adds a clear decision layer:
+
+- `accept`
+- `pending`
+- `reject`
+
+## Core Gate Logic
 
 ```python
 if signature_valid:
@@ -11,28 +17,38 @@ elif verification_ok:
     decision = "pending"
 else:
     decision = "reject"
-Meaning
+Decision Meaning
 Decision	Meaning
 accept	Evidence is valid and signature is valid
 pending	Evidence is valid, but signature is missing or not yet verified
 reject	Evidence is invalid or unsafe
-Why This Stage Matters
+What Stage299 Adds
 
 Stage288 showed a public verification URL.
 
-Stage299 adds the Gate engine.
+Stage299 adds the Gate.
 
-This means the verification page can now decide:
+This means QSP/VEP can now move from:
 
-accept
-pending
-reject
+showing evidence
 
-This is the bridge to Stage300, where an AI vulnerability verification URL can pass through the Gate and display accept.
+to:
 
+making a policy-based decision
+Why This Matters
+
+The Gate is the engine.
+
+It allows a verification system to decide whether evidence should pass, wait, or fail.
+
+This creates the foundation for Stage300:
+
+AI vulnerability URL
+→ Gate verification
+→ accept / pending / reject
 Security Policy
 
-Private keys are not included in this repository.
+This repository does not include private keys.
 
 The repository excludes:
 
@@ -43,6 +59,15 @@ keys/
 *.pfx
 .env
 local SSH keys
+
+Fail-closed behavior is enabled.
+
+If required evidence is invalid, the Gate must not accept it.
+
+Stage Role
+Stage288 = public verification URL
+Stage299 = Gate engine
+Stage300 = AI vulnerability verification showcase
 License
 
 MIT License
